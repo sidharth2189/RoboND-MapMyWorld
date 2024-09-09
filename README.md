@@ -217,10 +217,14 @@ There are two options to test localization.
 ```
 
 ## Useful links
-* [move_base](https://wiki.ros.org/move_base) can define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this package is optional if [teleop node](https://github.com/ros-teleop/teleop_twist_keyboard) is used instead to send command for robot movement, using keyboard.
-* [config files](https://s3-us-west-1.amazonaws.com/udacity-robotics/Resource/where_am_i/config.zip) for parameters for move_base package.
-* [map_server](https://wiki.ros.org/map_server) node provides map data as a ROS service to other nodes such as the amcl node. Here, map_server node will locate the map you created in the Map Setup(opens in a new tab) step and send it out as the map data.
-* [amcl](https://wiki.ros.org/amcl) package is used in this project for localization.
-* [Robot reference](https://github.com/sidharth2189/RoboND-GoChaseIt)
-* [Monte carlo localization](/docs/MCL_for_mobile_robots.pdf)
-* [Avoid robot chassis sinking in rviz](https://knowledge.udacity.com/questions/150890)
+* [Oppeni Kinnect](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#OpenniKinect) 3D Camera description file.
+[teleop node](https://github.com/ros-teleop/teleop_twist_keyboard) is used instead to send command for robot movement, using keyboard.
+* [Robot reference](https://github.com/sidharth2189/RoboND-WhereAmI)
+* [Graph slam](http://robot.cc/papers/thrun.graphslam.pdf) for large scale mapping of urban structures.
+* [Occupancy grid mapping](https://wiki.ros.org/gmapping). The gmapping package provides laser-based SLAM. as a ROS node called slam_gmapping. Using slam_gmapping, you can create a 2-D occupancy grid map (like a building floorplan) from laser and pose data collected by a mobile robot.
+* [rtabmap_ros](http://wiki.ros.org/rtabmap_ros) ROS wrapper of [Real-Time Appearance-Based Mapping](http://introlab.github.io/rtabmap/). This package can be used to generate a 3D point clouds of the environment and/or to create a 2D occupancy grid map for navigation. 
+* [rtabmap_viz](http://wiki.ros.org/rtabmap_viz). This node starts the visualization interface of RTAB-Map.
+* [RTAB-Map 3D Lidar SLAM](https://www.youtube.com/watch?v=ytsfhMdv9W0)
+* [RTAB-Map as an Open-Source Lidar and Visual SLAM Library for Large-Scale and Long-Term Online Operation](https://arxiv.org/html/2403.06341v1)
+* [Depth sensor cameras](https://www.e-consystems.com/blog/camera/technology/what-are-depth-sensing-cameras-how-do-they-work/?srsltid=AfmBOoq2aSWT2x0gB7iKADZXFQxWZhHf1KYBNXQfyo5Xnu2USkFZlyPb)
+* [Octomap](https://wiki.ros.org/octomap)

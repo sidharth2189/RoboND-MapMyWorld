@@ -1,5 +1,0 @@
-PGM Map File
-The map ROS AMCL Package uses a pgm file. A pgm file is a grayscale image file. 
-For more information about pgm file or more generally, pnm file, please refer to Netpbm format Wiki Page(https://en.wikipedia.org/wiki/Netpbm#File_formats).
-
-By default, AMCL package will treat 'darker' pixels as obstacle in the pgm map file, and 'lighter' pixels as free space. The threshold could be set as a parameter which we will cover when we are building the launch file.
