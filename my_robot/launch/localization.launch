@@ -52,7 +52,7 @@
       <param name="Vis/MinInliers" type="string" value="15"/>
 
       <!-- Localization mode -->
-      <param name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param name="Mem/IncrementalMemory" type="string" value="true"/>
     </node>
 
     <!-- visualization with rtabmapviz -->
