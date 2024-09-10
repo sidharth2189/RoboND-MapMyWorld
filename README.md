@@ -1,5 +1,5 @@
 # Map My World
-The purpose of this repository is to create a 2D occupancy grid and 3D octomap from a simulated environment using [robot](/my_robot/) with the [RTAB-Map package](https://wiki.ros.org/rtabmap_ros). 
+The purpose of this repository is to create a 2D occupancy grid and 3D octomap from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
@@ -204,4 +204,6 @@ roslaunch my_robot amcl.launch
 * [RTAB-Map 3D Lidar SLAM](https://www.youtube.com/watch?v=ytsfhMdv9W0)
 * [RTAB-Map as an Open-Source Lidar and Visual SLAM Library for Large-Scale and Long-Term Online Operation](https://arxiv.org/html/2403.06341v1)
 * [Depth sensor cameras](https://www.e-consystems.com/blog/camera/technology/what-are-depth-sensing-cameras-how-do-they-work/?srsltid=AfmBOoq2aSWT2x0gB7iKADZXFQxWZhHf1KYBNXQfyo5Xnu2USkFZlyPb)
-* [Octomap](https://wiki.ros.org/octomap)
+* [Octomap](https://octomap.github.io/)
+* [Tutorial on graph based SLAM](http://www2.informatik.uni-freiburg.de/~stachnis/pdf/grisetti10titsmag.pdf)
+* [Tether-Aware Path Planning for Autonomous Exploration of Unknown Environments](https://www.youtube.com/watch?v=nROO0BFK4lc)
