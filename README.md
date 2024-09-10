@@ -14,7 +14,7 @@ Inside the Gazebo world one can identify:
 ## Getting Started
 
 ### Directory structure
-    .WhereAmI                               # Robot localization Project
+    .MapMyWorld                             # Robot localization Project
     ├── my_robot                            # my_robot package                   
     │   ├── launch                          # launch folder for launch files   
     │   │   ├── robot_description.launch    # Generate urdf from xacro
@@ -40,7 +40,8 @@ Inside the Gazebo world one can identify:
     │   │   ├── map.pgm                     # map generated from pgm_map_creator package
     │   │   ├── map.yaml                    # map metadata
     │   ├── rtabmap                         # database generated from mapping
-    │   │   ├── rtabmap.db                  # database file    
+    │   │   ├── rtabmap.db                  # database file
+    ├── pgm_map_creator                     # map creator package (submodule)    
     ├── teleop_twist_keyboard               # package to control robot motion through keyboard (submodule)
     ├── amcl.rviz                           # visualization file for localization using amcl                           
     └──                          
