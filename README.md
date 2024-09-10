@@ -48,6 +48,8 @@ Inside the Gazebo world one can identify:
     └──                          
 
 ### Node view
+
+Node view for graph-based SLAM using rtabmaps for [my_robot](/my_robot/)
 <img src="/docs/rqt_graph.png"/>
 
 ### Dependencies
