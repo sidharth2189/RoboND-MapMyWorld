@@ -1,5 +1,5 @@
 # Map My World
-The purpose of this repository is to create a 2D occupancy grid and 3D octomap from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
+The purpose of this repository is to create a 2D occupancy grid and 3D map from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
@@ -120,13 +120,15 @@ roslaunch my_robot localization.launch
 ```
   * Please note that, in the launch file, setting the parameter ```Mem/IncrementalMemory``` to ```false```, causes [empty working memory](/docs/warning_memory.png)
   * Hence, it is set to ```true```.
-* Navigate your robot in the simulation to create map for the environment.
-* When this is done, terminal the node and the map db file can be found in the place specified in the launch file. If the argument is not modified, it will be located in the /root/.ros/ folder.
-* Database analysis: The ```rtabmap-databaseViewer``` is used for exploring database after generation. It is isolated from ROS and allows for complete analysis of your mapping session.
+* Navigate robot in the simulation to create map for the environment.
+* When this is done, terminal the node and the map db file can be found in the place specified in the launch file. If the argument is not modified, it will be located in the ```/root/.ros/``` folder.
+* Database analysis: ```rtabmap-databaseViewer``` is used for exploring database after generation. It is isolated from ROS and allows for complete analysis of mapping session.
 * Open map database as below
 ```
 rtabmap-databaseViewer ~/.ros/rtabmap.db
 ```
+<img src="/docs/rtabmap-databseViewer.png"/>
+
 * Add some windows to get a better view of the relevant information.
   * Say yes to using the database parameters
   * View -> Constraint View
