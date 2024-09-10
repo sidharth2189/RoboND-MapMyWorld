@@ -1,10 +1,11 @@
 Summary of Tasks
-In this project, robot localization is done using adaptive Monte Carlo in ROS
+In this project, simulatneous localization and mapping on custom robot and its environment is done using rtabmaps.
 
 my_robot:
 
 1) Create a ROS package that launches a custom robot model in a custom Gazebo world
-For this purpose, reuse robot from previous project. (https://github.com/sidharth2189/RoboND-GoChaseIt).
-2) After setting up simulation environment, generate ground truth map from gazebo world using pgm_map_creator.
-3) Utilize the ROS AMCL package and the Tele-Operation / Navigation Stack to localize the robot.
-4) Explore, add, and tune specific parameters corresponding to each package to achieve the best possible localization results.
+For this purpose, reuse robot from previous project. (https://github.com/sidharth2189/RoboND-WhereAmI).
+2) After setting up simulation environment, use the teleop node for robot navigation in the world. 
+Note that the environment should have clear features and geometric shapes to perform mapping.
+3) Utilize the rtabmap ROS package to perform SLAM.
+4) Generate 3D map and analyse database using rtabmap-databaseViewer.

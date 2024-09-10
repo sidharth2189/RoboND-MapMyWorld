@@ -3,7 +3,7 @@ The purpose of this repository is to create a 2D occupancy grid and 3D octomap f
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
-<img src="amcl_robot.gif"/>
+<img src="MapMyWorld.gif"/>
 
 ## Description
 Inside the Gazebo world one can identify:
@@ -21,7 +21,8 @@ Inside the Gazebo world one can identify:
     │   │   ├── world.launch                # launch Gazebo world along with robot
     │   │   ├── amcl.launch                 # launch robot localization using amcl
     │   │   ├── mapping.launch              # launch mapping node using rtabmap
-    │   │   ├── localization.launch         # launch mapping with localization    
+    │   │   ├── localization.launch         # launch mapping with localization
+    │   │   ├── teleop.launch               # launch teleop_twist_keyboard to move robot    
     │   ├── meshes                          # meshes folder for sensors
     │   │   ├── hokuyo.dae                  # Hokuyo lidar sensor
     │   ├── urdf                            # urdf folder for xarco files
@@ -46,6 +47,9 @@ Inside the Gazebo world one can identify:
     ├── amcl.rviz                           # visualization file for localization using amcl                           
     └──                          
 
+### Node view
+<img src="/docs/rqt_graph.png"/>
+
 ### Dependencies
 
 * Operating System — Ubuntu 16.04 LTS. ([Udacity VM Image](https://s3-us-west-1.amazonaws.com/udacity-robotics/Virtual+Machines/Lubuntu_071917/RoboVM_V2.1.0.zip))
@@ -57,90 +61,7 @@ Inside the Gazebo world one can identify:
 gazebo
 ```
 
-### How to generate map from gazebo world environment
-* The ROS amcl node uses a [map file](/docs/pgm_map).
-* This step helps generate a [map](/my_robot/maps/map.pgm) for the robot to knows what to expect in environment.
-* For this purpose, [pgm_map_creator](/pgm_map_creator/) is used.
-* Navigate to ROS package folder and create a maps folder. That's where the map file will reside.
-```
-cd /home/workspace/catkin_ws/src/<YOUR PACKAGE NAME>
-```
-```
-mkdir maps
-```
-* Install Dependencies for compiling map creator.
-```
-sudo apt-get install libignition-math2-dev protobuf-compiler
-```
-* Clone repository or use the [submodule](/pgm_map_creator/) in this repository.
-```
-cd /home/workspace/catkin_ws/src/
-```
-```
-git clone https://github.com/hyfan1116/pgm_map_creator.git
-```
-* Build package
-```
-cd ..
-catkin_make
-```
-* Add and Edit the World File
-Copy the Gazebo world you created to the world folder in pgm_map_creator
-```
-cp <YOUR GAZEBO WORLD FILE> src/pgm_map_creator/world/<YOUR GAZEBO WORLD FILE>
-```
-* Insert the map creator plugin to world file. Open the world file using the editor of your choice. Add the following tag towards the end of the file, but just before </world> tag:
-```
-<plugin filename="libcollision_map_creator.so" name="collision_map_creator"/>
-```
-* Create the PGM map
-Open a terminal, run gzerver with the map file
-```
-gzserver src/pgm_map_creator/world/<YOUR GAZEBO WORLD FILE>
-```
-* Open another terminal, launch the request_publisher node
-```
-roslaunch pgm_map_creator request_publisher.launch
-```
-* Wait for the plugin to generate map. It will be located in the map folder of the pgm_map_creator! 
-* Open it to do a quick check of the map. If the map is cropped, you might want to adjust the parameters in launch/request_publisher.launch, namely the x and y values, which defines the size of the map
-```
-  <arg name="xmin" default="-15" />
-  <arg name="xmax" default="15" />
-  <arg name="ymin" default="-15" />
-  <arg name="ymax" default="15" />
-  <arg name="scan_height" default="5" />
-  <arg name="resolution" default="0.01" />
-```
-* Edit the Map
-If map is not accurate due to the models, feel free to edit the pgm file directly!
-
-* Add the Map to robot Package
-Now we have the map file, let us move it to where it is needed! That is the maps folder created at the very beginning of [robot package](/my_robot/)
-```
-cd /home/workspace/catkin_ws/
-cp src/pgm_map_creator/maps/<YOUR MAP NAME>  src/<YOUR PACKAGE NAME>/maps/<YOUR MAP NAME>
-```
-
-* A yaml file providing the [metadata about the map](https://wiki.ros.org/map_server#YAML_format). Create a yaml file next to map.
-```
-cd src/<YOUR PACKAGE NAME>/src/maps
-touch <YOUR MAP NAME>.yaml
-```
-
-* Add below lines to the yaml file.
-```
-image: <YOUR MAP NAME>
-resolution: 0.01
-origin: [-15.0, -15.0, 0.0]
-occupied_thresh: 0.65
-free_thresh: 0.196
-negate: 0
-```
-
-* Note that the origin of the map should correspond to map's size. For example, the default map size is 30 by 30, so the origin will be [-15, -15, 0], i.e. half the size of the map.
-
-### How to run localization
+### How to run
 * Update and upgrade the Workspace
 ```
 sudo apt-get update && sudo apt-get upgrade -y
@@ -159,12 +80,12 @@ catkin_init_workspace
 ```
 * Clone this repository and its submodules.
 ```
-git clone https://github.com/sidharth2189/RoboND-WhereAmI.git
+git clone https://github.com/sidharth2189/RoboND-MapMyWorld.git
 ```
 ```
 git submodule update --init --recursive
 ```
-* Copy ```my_robot```, ```pgm_map_creator``` and ```teleop_twist_keyboard``` packages into the source folder for catkin workspace.```/catkin_ws/src```
+* Copy ```my_robot``` and [```teleop_twist_keyboard```](https://github.com/ros-teleop/teleop_twist_keyboard) packages into the source folder for catkin workspace.```/catkin_ws/src```
 * Navigate to catkin workspace.
 ```
 cd ~/catkin_ws/
@@ -185,17 +106,46 @@ rosdep check <package name>
 ```
 roslaunch my_robot world.launch
 ```
-* Launch amcl in another terminal.
+* Launch teleop in another terminal.
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
-roslaunch my_robot amcl.launch
+roslaunch my_robot teleop.launch
 ```
-* To visualize the map and robot localization load [amcl.rviz](/amcl.rviz) using rviz window.
+* Launch localization using rtbmaps in another terminal.
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch my_robot localization.launch
+```
+  * Please note that, in the launch file, setting the parameter ```Mem/IncrementalMemory``` to ```false```, causes [empty working memory](/docs/warning_memory.png)
+  * Hence, it is set to ```true```.
+* Navigate your robot in the simulation to create map for the environment.
+* When this is done, terminal the node and the map db file can be found in the place specified in the launch file. If the argument is not modified, it will be located in the /root/.ros/ folder.
+* Database analysis: The ```rtabmap-databaseViewer``` is used for exploring database after generation. It is isolated from ROS and allows for complete analysis of your mapping session.
+* Open map database as below
+```
+rtabmap-databaseViewer ~/.ros/rtabmap.db
+```
+* Add some windows to get a better view of the relevant information.
+  * Say yes to using the database parameters
+  * View -> Constraint View
+  * View -> Graph View
+  * On the left, you have your 2D grid map in all of its updated iterations and the path of your robot.
+  * In the middle you have different images from the mapping process. Here you can scrub through images to see all of the features from your detection algorithm. These features are in yellow. The pink indicates where two images have features in common and this information is being used to create neighboring links and loop closures!
+  * Finally, on the right you can see the constraint view. This is where you can identify where and how the neighboring links and loop closures were created.
+  * You can see the number of loop closures in the bottom left.
+  * The codes stand for the following: Neighbor, Neighbor Merged, Global Loop closure, Local loop closure by space, Local loop closure by time, User loop closure, and Prior link.  
+
+### Best practices
+* One can start with lower velocities.
+* The Goal is to create a great map with the least amount of passes as possible.
+* Maximize loop closures by going over similar paths two or three times. 
+* This allows for the maximization of feature detection, facilitating faster loop closures
 
 ## Useful links
 * [Oppeni Kinnect](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#OpenniKinect) 3D Camera description file.
-* [teleop node](https://github.com/ros-teleop/teleop_twist_keyboard) is used to send command for robot movement, using keyboard.
+* [Ros Teleop package](https://github.com/ros-teleop/teleop_twist_keyboard) is used to send command for robot movement, using keyboard.
 * [Robot reference](https://github.com/sidharth2189/RoboND-WhereAmI)
 * [Graph slam](http://robot.cc/papers/thrun.graphslam.pdf) for large scale mapping of urban structures.
 * [Occupancy grid mapping](https://wiki.ros.org/gmapping). The gmapping package provides laser-based SLAM. as a ROS node called slam_gmapping. Using slam_gmapping, you can create a 2-D occupancy grid map (like a building floorplan) from laser and pose data collected by a mobile robot.
