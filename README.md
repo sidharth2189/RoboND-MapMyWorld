@@ -1,5 +1,5 @@
-# Where Am I
-The purpose of this repository is to estimate a robot's position relative to a known map of environment using [adaptive monte carlo localization](https://wiki.ros.org/amcl). 
+# Map My World
+The purpose of this repository is to create a 2D occupancy grid and 3D octomap from a simulated environment using your own robot with the [RTAB-Map package](https://wiki.ros.org/rtabmap_ros). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
@@ -19,11 +19,13 @@ Inside the Gazebo world one can identify:
     │   ├── launch                          # launch folder for launch files   
     │   │   ├── robot_description.launch    # Generate urdf from xacro
     │   │   ├── world.launch                # launch Gazebo world along with robot
-    │   │   ├── amcl.launch                 # launch robot localization using amcl    
+    │   │   ├── amcl.launch                 # launch robot localization using amcl
+    │   │   ├── mapping.launch              # launch mapping node using rtabmap
+    │   │   ├── localization.launch         # launch mapping with localization    
     │   ├── meshes                          # meshes folder for sensors
     │   │   ├── hokuyo.dae                  # Hokuyo lidar sensor
     │   ├── urdf                            # urdf folder for xarco files
-    │   │   ├── my_robot.gazebo             # Plugin for sensor/actuator (Camera/Hokuyo lidar/Differential drive)
+    │   │   ├── my_robot.gazebo             # Plugin for sensor/actuator (RGBD camera/Hokuyo lidar/Differential drive)
     │   │   ├── my_robot.xacro              # Robot description
     │   ├── world                           # world folder for world files
     │   │   ├── office.world
@@ -36,10 +38,11 @@ Inside the Gazebo world one can identify:
     │   │   ├── base_costmap_params.yaml    # rosparam for move_base package
     │   ├── maps                            # parmater for robot's navigational goal   
     │   │   ├── map.pgm                     # map generated from pgm_map_creator package
-    │   │   ├── map.yaml                    # map metadata    
-    ├── pgm_map_creator                     # map creator package (submodule)
-    ├── teleop_twist_keyboard               # control robot motion through keyboard (submodule)  
-    ├── amcl.rviz                           # visualization file                                      
+    │   │   ├── map.yaml                    # map metadata
+    │   ├── rtabmap                         # database generated from mapping
+    │   │   ├── rtabmap.db                  # database file    
+    ├── teleop_twist_keyboard               # package to control robot motion through keyboard (submodule)
+    ├── amcl.rviz                           # visualization file for localization using amcl                           
     └──                          
 
 ### Dependencies
@@ -188,33 +191,6 @@ source devel/setup.bash
 roslaunch my_robot amcl.launch
 ```
 * To visualize the map and robot localization load [amcl.rviz](/amcl.rviz) using rviz window.
-
-### How to tune parameters for localization
-* Reference for tuning [amcl parameters](/docs/amcl_parameters.txt) for better results.
-* Reference for [move_base parameters](/docs/move_base.txt).
-
-### How to test localization
-There are two options to test localization.
-* Send navigation goal via RViz.
-    * In rviz, click the ```2D Nav Goal``` button in the toolbar, then click and drag on the map send the goal to the robot. It will start moving and localize itself in the process. Refer [clip](/amcl.gif).
-    * The amcl node can also be given a nudge, by providing the robot an initial position estimate on the map using ```2D Pose Estimate```.
-        * Alternatively, set initial pose for robot in ```amcl.launch``` using below [steps](https://knowledge.udacity.com/questions/343189).
-            * Launch the amcl.launch, the map will appear in the RVIZ section.
-            * Keep the fixed frame as map and use ```2D pose Estimate``` button to set the robot location such that the laserscan matches the map.
-            * Once you finalize the location, you can see it on the terminal where you launched the amcl.launch file, the location will appear which you can use as the initial pose for amcl node. 
-
-* Send move command via ```teleop``` package.
-    * Control robot through keyboard as done in [EKF lab](https://github.com/sidharth2189/RoboND-EKFLab). The [teleop node](/teleop_twist_keyboard/teleop) needs to be added to package in this case. 
-
-### Observation
-* While parameters are good to play with, it needs to be made sure that sensors placed on the robot are not obstructed by robot chassis itself.
-* This [image](/docs/laser_hit_chassis.png) represents such a case, where laser scans are obstructed by robot chassis.
-* As a result the scans [fluctuate](/docs/fluctuating_laser_scans.gif).
-* As a result localization is [improper](/docs/amcl_laser_obstructed_by_chassis.gif).
-* In this case, the corrective actions was to increase the x-pose of the Lidar joint in the [urdf file](/my_robot/urdf/my_robot.xacro) from 0.15 to 0.25.
-```
-<origin xyz="0.25 0 0.1" rpy="0 0 0"/>
-```
 
 ## Useful links
 * [Oppeni Kinnect](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#OpenniKinect) 3D Camera description file.
