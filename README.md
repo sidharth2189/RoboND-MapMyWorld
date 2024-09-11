@@ -55,7 +55,13 @@ Node view for graph-based SLAM using rtabmaps for [my_robot](/my_robot/)
 ### Dependencies
 
 * Operating System — Ubuntu 16.04 LTS. ([Udacity VM Image](https://s3-us-west-1.amazonaws.com/udacity-robotics/Virtual+Machines/Lubuntu_071917/RoboVM_V2.1.0.zip))
-    *  Please refer steps for usage of VM, resource allocation and first boot [here](/docs/VM.txt).
+  *  Please refer steps for usage of VM, resource allocation and first boot [here](/docs/VM.txt).
+
+* [rtabmaps ros](http://wiki.ros.org/rtabmap_ros)
+  * If the package is unavailable for above VM (ros kinetic), please install as below.
+  ```sudo apt-get install ros-kinetic-rtabmap-ros```
+
+* Git LFS: The generated database is [stored](/my_robot/rtabmap/rtabmap.db) as an LFS file due to its size. Please [install git LFS](https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md) on system to be able to not have issues fetching this file.
 
 ### Installing
 * To verify installation, run
@@ -161,3 +167,4 @@ rtabmap-databaseViewer ~/.ros/rtabmap.db
 * [Octomap](https://octomap.github.io/)
 * [Tutorial on graph based SLAM](http://www2.informatik.uni-freiburg.de/~stachnis/pdf/grisetti10titsmag.pdf)
 * [Tether-Aware Path Planning for Autonomous Exploration of Unknown Environments](https://www.youtube.com/watch?v=nROO0BFK4lc)
+* [Mapping techniques in AI and robotics](https://www.geeksforgeeks.org/mapping-techniques-in-artificial-intelligence-and-robotics/)
