@@ -156,7 +156,9 @@ rtabmap-databaseViewer ~/.ros/rtabmap.db
 ### Advanced tuning parameters
 * Please take a look at the [advanced tuning parameters](http://wiki.ros.org/rtabmap_ros/Tutorials/Advanced%20Parameter%20Tuning)
 * Based on optimization robsutness as discussed in [knowledge hub](https://knowledge.udacity.com/questions/714369), following line is added to [localization launch file](/my_robot/launch/localization.launch)
-```<param name="Optimizer/Robust" type="string" value="true"/>```
+```
+<param name="Optimizer/Robust" type="string" value="true"/>
+```
 
 ## Useful links
 * [Oppeni Kinnect](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#OpenniKinect) 3D Camera description file.
