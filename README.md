@@ -1,9 +1,9 @@
 # Map My World
-The purpose of this repository is to create a 2D occupancy grid and 3D map from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
+The purpose of this repository is to create a [2D occupancy grid](/docs/rtabmap_databseViewer.png) and [3D map](/docs/MapMyWorld.png) from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
-<img src="MapMyWorld.gif"/>
+<img src="Map_My_World.gif"/>
 
 ## Description
 Inside the Gazebo world one can identify:
@@ -135,7 +135,7 @@ roslaunch my_robot localization.launch
 ```
 rtabmap-databaseViewer ~/.ros/rtabmap.db
 ```
-<img src="/docs/rtabmap-databseViewer.png"/>
+<img src="/docs/rtabmap_databseViewer.png"/>
 
 * Add some windows to get a better view of the relevant information.
   * Say yes to using the database parameters
@@ -152,6 +152,11 @@ rtabmap-databaseViewer ~/.ros/rtabmap.db
 * The Goal is to create a great map with the least amount of passes as possible.
 * Maximize loop closures by going over similar paths two or three times. 
 * This allows for the maximization of feature detection, facilitating faster loop closures
+
+### Advanced tuning parameters
+* Please take a look at the [advanced tuning parameters](http://wiki.ros.org/rtabmap_ros/Tutorials/Advanced%20Parameter%20Tuning)
+* Based on optimization robsutness as discussed [here](https://knowledge.udacity.com/questions/714369), folowing line is added to [localization launch file](/my_robot/launch/localization.launch)
+```<param name="Optimizer/Robust" type="string" value="true"/>```
 
 ## Useful links
 * [Oppeni Kinnect](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#OpenniKinect) 3D Camera description file.
