@@ -53,6 +53,10 @@
 
       <!-- Localization mode -->
       <param name="Mem/IncrementalMemory" type="string" value="true"/>
+
+      <!-- Robust graph optimization -->
+      <param name="Optimizer/Robust" type="string" value="true"/>
+
     </node>
 
     <!-- visualization with rtabmapviz -->
