@@ -6,7 +6,7 @@ The steps are listed as [summary of tasks](task_summary.txt).
 <img src="Map_My_World.gif"/>
 
 ## Description
-Inside the Gazebo world one can identify:
+Inside the [Gazebo world](https://github.com/sidharth2189/RoboND-GazeboWorld/blob/main/images/office.png) one can identify:
 
 * Two wheeled Robot with caster.
 * Sensors (lidar and camera) mounted on the robot.
@@ -169,6 +169,7 @@ rtabmap-databaseViewer ~/.ros/rtabmap.db
 * [rtabmap_ros](http://wiki.ros.org/rtabmap_ros)- It is the ROS wrapper of [Real-Time Appearance-Based Mapping](http://introlab.github.io/rtabmap/). This package can be used to generate a 3D point clouds of the environment and/or to create a 2D occupancy grid map for navigation. 
 * [rtabmap_viz](http://wiki.ros.org/rtabmap_viz)- This node starts the visualization interface of RTAB-Map.
 * [RTAB-Map 3D Lidar SLAM](https://www.youtube.com/watch?v=ytsfhMdv9W0)
+* [RTAB-Map ROS Tutorial](https://www.youtube.com/watch?v=gJz-MWn7jhE)
 * [RTAB-Map as an Open-Source Lidar and Visual SLAM Library for Large-Scale and Long-Term Online Operation](https://arxiv.org/html/2403.06341v1)
 * [Depth sensor cameras](https://www.e-consystems.com/blog/camera/technology/what-are-depth-sensing-cameras-how-do-they-work/?srsltid=AfmBOoq2aSWT2x0gB7iKADZXFQxWZhHf1KYBNXQfyo5Xnu2USkFZlyPb)
 * [Octomap](https://octomap.github.io/)
