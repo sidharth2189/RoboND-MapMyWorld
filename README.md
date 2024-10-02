@@ -1,5 +1,5 @@
 # Map My World
-The purpose of this repository is to create a [2D occupancy grid](/docs/2D_Occupancy_Grid_Map.png) and [3D map](/docs/MapMyWorld.png) from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
+The purpose of this repository is to perform graph SLAM and create a [2D occupancy grid](/docs/2D_Occupancy_Grid_Map.png) and [3D map](/docs/MapMyWorld.png) from a simulated environment using [robot](/my_robot/) with the [RTAB-Map](https://introlab.github.io/rtabmap/). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
