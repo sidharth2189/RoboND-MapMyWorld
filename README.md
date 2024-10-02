@@ -37,7 +37,7 @@ Inside the [Gazebo world](https://github.com/sidharth2189/RoboND-GazeboWorld/blo
     │   │   ├── local_costmap_params.yaml   # rosparam for move_base package
     │   │   ├── global_costmap_params.yaml  # rosparam for move_base package
     │   │   ├── base_costmap_params.yaml    # rosparam for move_base package
-    │   ├── maps                            # parmater for robot's navigational goal   
+    │   ├── maps                            # map storage   
     │   │   ├── map.pgm                     # map generated from pgm_map_creator package
     │   │   ├── map.yaml                    # map metadata
     │   ├── rtabmap                         # database generated from mapping
